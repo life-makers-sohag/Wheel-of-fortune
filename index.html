@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السعادة برسالة</title>
+    <link rel="icon" href="unnamed-removebg-preview.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- أيقونة القائمة الجانبية -->
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <!-- القائمة الجانبية -->
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="toggleMenu()">✖</button>
+        <h2>برطمان السعادة</h2>
+        <ul>
+            <li><a href="page\index.html">ورد الذكر</a></li>
+            <li>تحدي كل يوم</li>
+        </ul>
+        
+    
+        <footer class="main-footer">
+            <p>© 2025 جميع الحقوق محفوظة</p>
+            <p>Developed by: Mahmoud Hamed</p>
+          </footer>
+    </div>
+
+    <!-- نافذة الترحيب -->
+    <div id="welcome-popup" class="popup">
+        <div class="popup-card">
+            <img src="katkot.png" alt="كتكوت" id="welcome-img">
+            <p id="welcome-message"></p>
+            <button id="close-welcome">إغلاق</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="compass-wheel-container">
+            <div class="compass-wheel" id="compass-wheel">
+                <img src="unnamed-removebg-preview.png" alt="عجلة الحظ" id="wheel-image">
+            </div>
+            <button id="spin-btn">🎯 اضغط لتدوير البرطمان</button>
+        </div>
+    </div>
+
+    <!-- الرسالة العائمة -->
+    <div id="message-popup" class="popup">
+        <div class="popup-card">
+            <p id="popup-message"></p>
+            <button id="close-popup">إغلاق</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
