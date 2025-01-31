@@ -473,9 +473,24 @@ loadMessages();
 
 function toggleMenu() {
     var sidebar = document.getElementById("sidebar");
-    if (sidebar.style.left === "0px") {
-        sidebar.style.left = "-280px";
+    var menuIcon = document.querySelector(".menu-icon");
+
+    if (sidebar.classList.contains("open")) {
+        sidebar.classList.remove("open");
+        menuIcon.innerHTML = "☰"; // تغيير الأيقونة عند الإغلاق
     } else {
-        sidebar.style.left = "0px";
+        sidebar.classList.add("open");
+        menuIcon.innerHTML = "✖"; // تغيير الأيقونة عند الفتح
     }
 }
+
+// إغلاق القائمة عند النقر خارجها
+document.addEventListener("click", function (event) {
+    var sidebar = document.getElementById("sidebar");
+    var menuIcon = document.querySelector(".menu-icon");
+
+    if (!sidebar.contains(event.target) && !menuIcon.contains(event.target)) {
+        sidebar.classList.remove("open");
+        menuIcon.innerHTML = "☰"; // تغيير الأيقونة عند الإغلاق
+    }
+});

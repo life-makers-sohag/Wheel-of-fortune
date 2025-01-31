@@ -69,14 +69,63 @@ document.getElementById("reset-btn").addEventListener("click", () => {
 });
 
 document.getElementById("open-dhikr-btn").addEventListener("click", () => {
-    window.location.href = "azkar.html"; // الانتقال إلى صفحة الأذكار
+    window.location.href = "azkar/azkar.html"; // الانتقال إلى صفحة الأذكار
 });
 
+// function toggleMenu() {
+//     var sidebar = document.getElementById("sidebar");
+//     if (sidebar.style.left === "0px") {
+//         sidebar.style.left = "-280px";
+//     } else {
+//         sidebar.style.left = "0px";
+//     }
+// }
 function toggleMenu() {
     var sidebar = document.getElementById("sidebar");
-    if (sidebar.style.left === "0px") {
-        sidebar.style.left = "-280px";
+    var menuIcon = document.querySelector(".menu-icon");
+
+    if (sidebar.classList.contains("open")) {
+        sidebar.classList.remove("open");
+        menuIcon.innerHTML = "☰"; // تغيير الأيقونة عند الإغلاق
     } else {
-        sidebar.style.left = "0px";
+        sidebar.classList.add("open");
+        menuIcon.innerHTML = "✖"; // تغيير الأيقونة عند الفتح
     }
 }
+
+// إغلاق القائمة عند النقر خارجها
+document.addEventListener("click", function (event) {
+    var sidebar = document.getElementById("sidebar");
+    var menuIcon = document.querySelector(".menu-icon");
+
+    if (!sidebar.contains(event.target) && !menuIcon.contains(event.target)) {
+        sidebar.classList.remove("open");
+        menuIcon.innerHTML = "☰"; // تغيير الأيقونة عند الإغلاق
+    }
+});
+
+// دالة لتحميل الذكر المحدد
+function loadSelectedDhikr(dhikrText) {
+    document.getElementById("dhikr-text").textContent = dhikrText;
+    document.getElementById("dhikr-count").textContent = "عدد التكرار: 33"; // يمكن تغيير العدد حسب الحاجة
+}
+
+// عند النقر على ذكر من الأذكار المحفوظة
+document.addEventListener("DOMContentLoaded", function () {
+    const azkarList = document.getElementById("azkar-list");
+    if (azkarList) {
+        azkarList.addEventListener("click", function (event) {
+            if (event.target.tagName === "LI") {
+                const selectedDhikr = event.target.textContent;
+                localStorage.setItem("selectedDhikr", selectedDhikr);
+                window.location.href = "../index.html"; // الانتقال إلى الصفحة الرئيسية
+            }
+        });
+    }
+
+    // تحميل الذكر المحدد عند فتح الصفحة
+    const selectedDhikr = localStorage.getItem("selectedDhikr");
+    if (selectedDhikr) {
+        loadSelectedDhikr(selectedDhikr);
+    }
+});

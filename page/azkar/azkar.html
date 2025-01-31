@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة الأذكار</title>
+    <link rel="stylesheet" href="style2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- أيقونة القائمة الجانبية -->
+<div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+<!-- القائمة الجانبية -->
+<div id="sidebar" class="sidebar">
+    <h2>برطمان السعادة</h2>
+    <ul>
+        <li><a href="..\index.html">ورد الذكر</a></li>
+        <li>تحدي كل يوم</li>
+    </ul>
+    <footer class="main-footer">
+        <p>© 2025 جميع الحقوق محفوظة</p>
+        <p>Developed by: Mahmoud Hamed</p>
+    </footer>
+</div>
+
+<!-- قسم إضافة الأذكار -->
+<div class="azkar-container">
+    <h2>أضف ذكرًا جديدًا</h2>
+    <input type="text" id="zekr-input" placeholder="اكتب الذكر هنا">
+    <input type="number" id="zekr-count" placeholder="عدد التكرار" min="1">
+    <button onclick="addZekr()">إضافة الذكر</button>
+
+    <h3>الأذكار المحفوظة:</h3>
+    <div id="azkar-list"></div> <!-- تم تغيير <ul> إلى <div> -->
+</div>
+
+<script src="script2.js"></script>
+
+</body>
+</html>
