@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المسبحة الإلكترونية</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<!-- أيقونة القائمة الجانبية -->
+<div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+<!-- القائمة الجانبية -->
+<div id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="toggleMenu()">✖</button>
+    <h2>برطمان السعادة</h2>
+    <ul>
+        <li><a href="../index.html">السعادة برسالة</a></li>
+        <li>تحدي كل يوم</li>
+    </ul>
+    
+
+    <footer class="main-footer">
+        <p>© 2025 جميع الحقوق محفوظة</p>
+        <p>Developed by: Mahmoud Hamed</p>
+      </footer>
+</div>
+
+
+
+    <!-- قسم الذكر وعدد التكرار -->
+    <div class="dhikr-section">
+        <p id="dhikr-text">سبحان الله والحمد لله ولا إله إلا الله والله أكبر</p>
+        <p id="dhikr-count">عدد التكرار: 50</p>
+    </div>
+
+    <!-- المسبحة -->
+    <div class="misbaha">
+        <!-- شاشة العرض -->
+        <div class="screen">
+            <p id="count">0</p>
+        </div>
+
+        <!-- الأزرار -->
+        <div class="buttonss">
+            <button id="increment-btn" class="big-btn">تسبيح</button>
+            <button id="reset-btn" class="small-btn">اعادة ضبط</button>
+        </div>
+
+        <!-- زر فتح صفحة الأذكار -->
+        <!-- <button id="open-dhikr-btn" class="open-dhikr-btn">فتح الأذكار</button> -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
