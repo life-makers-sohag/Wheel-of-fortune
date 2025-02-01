@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Cairo', sans-serif;
     background: linear-gradient(to bottom, #024675, #f7af43, #ffffff);
     color: white;
     text-align: center;
@@ -12,21 +12,19 @@ body {
     min-height: 100vh;
     direction: rtl;
   }
-/* حاوية العناصر */
-.container {
+  
+  /* حاوية العناصر */
+  .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 40px;
     width: 100%;
-}
-
-
-
-
-/* القائمة الجانبية */
-.sidebar {
+  }
+  
+  /* القائمة الجانبية */
+  .sidebar {
     position: fixed;
     top: 0;
     left: -280px;
@@ -41,16 +39,16 @@ body {
     visibility: hidden;
     transform: perspective(1000px) rotateY(10deg);
     transform-origin: left;
-}
-
-.sidebar.open {
+  }
+  
+  .sidebar.open {
     left: 0;
     opacity: 1;
     visibility: visible;
     transform: perspective(1000px) rotateY(0deg);
-}
-
-.sidebar h2 {
+  }
+  
+  .sidebar h2 {
     text-align: center;
     padding: 20px 0;
     font-size: 24px;
@@ -58,35 +56,35 @@ body {
     margin: 0;
     color: #ecf0f1;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.sidebar ul {
+  }
+  
+  .sidebar ul {
     padding: 0;
     list-style: none;
     margin: 0;
-}
-
-.sidebar ul li {
+  }
+  
+  .sidebar ul li {
     padding: 15px;
     border-bottom: 1px solid #34495e;
     text-align: center;
     transition: background 0.3s, transform 0.3s;
-}
-
-.sidebar ul li a {
+  }
+  
+  .sidebar ul li a {
     text-decoration: none;
     color: white;
     display: block;
     font-size: 18px;
-}
-
-.sidebar ul li:hover {
+  }
+  
+  .sidebar ul li:hover {
     background: #34495e;
     transform: translateX(10px);
-}
-
-/* زر القائمة */
-.menu-icon {
+  }
+  
+  /* زر القائمة */
+  .menu-icon {
     font-size: 26px;
     cursor: pointer;
     position: fixed;
@@ -98,22 +96,24 @@ body {
     border-radius: 50%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.menu-icon:hover {
+    /* لضمان ظهورها فوق الكروت والعناصر الأخرى */
+    z-index: 2000;
+  }
+  
+  .menu-icon:hover {
     background: #2980b9;
     transform: scale(1.1) rotate(90deg);
-}
-
-
-/* البطاقة 3D */
-.challenge-card {
+  }
+  
+  /* البطاقة 3D */
+  .challenge-card {
     width: 300px;
     height: 400px;
     perspective: 1000px;
     position: relative;
     margin: 20px;
   }
+  
   .challenge-front, .challenge-back {
     width: 100%;
     height: 100%;
@@ -126,71 +126,70 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    transition: transform 0.6s;
   }
-
-.challenge-front {
+  
+  .challenge-front {
     background: #024675;
     color: #fff;
   }
+  
   .challenge-back {
     background: #f7af43;
     color: #333;
     transform: rotateY(180deg);
   }
+  
   .challenge-card:hover .challenge-front {
     transform: rotateY(180deg);
   }
+  
   .challenge-card:hover .challenge-back {
     transform: rotateY(0deg);
   }
-
-
-/* إضافة هذا الجزء لمنع الاختفاء */
-.challenge-card.active .challenge-front {
+  
+  /* إضافة هذا الجزء لمنع الاختفاء */
+  .challenge-card.active .challenge-front {
     transform: rotateY(0deg);
-}
-
-.challenge-card.active .challenge-back {
+  }
+  
+  .challenge-card.active .challenge-back {
     transform: rotateY(180deg);
-}
-
-/* تنسيق النافذة العائمة */
-.floating-message {
+  }
+  
+  /* تنسيق النافذة العائمة */
+  .floating-message {
     display: none;
     position: fixed;
     top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     width: 80%;
     max-width: 400px;
-    z-index: 1000;
+    z-index: 1500;
     font-family: "Cairo", sans-serif;
-    font: size 1.4em;
+    font-size: 1.4em;
     line-height: 1.8;
   }
+  
   .buttons {
     margin-top: 20px;
   }
   
-
-
-
-
-/* مؤشرات القبول/الرفض */
-.indicator {
+  /* مؤشرات القبول/الرفض */
+  .indicator {
     font-size: 30px;
     margin-top: 10px;
     display: none;
   }
-
-
-/* تنسيق الأزرار */
-button {
+  
+  /* تنسيق الأزرار */
+  button {
     background: #024675;
     color: white;
     padding: 12px 25px;
@@ -201,6 +200,8 @@ button {
     font-size: 16px;
     transition: background 0.3s ease;
   }
+  
   button:hover {
     background: #2980b9;
   }
+  
