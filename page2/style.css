@@ -169,11 +169,17 @@ body {
     width: 80%;
     max-width: 400px;
     z-index: 1000;
+    font-family: "Cairo", sans-serif;
+    font: size 1.4em;
+    line-height: 1.8;
   }
   .buttons {
     margin-top: 20px;
   }
   
+
+
+
 
 /* مؤشرات القبول/الرفض */
 .indicator {

@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     const challengeText2 = document.getElementById("challenge-text-2");
     const checkmark1 = document.getElementById("checkmark-1");
     const checkmark2 = document.getElementById("checkmark-2");
-    const crossmark1 = document.getElementById("crossmark-1");
-    const crossmark2 = document.getElementById("crossmark-2");
   
     const acceptChallenge = document.getElementById("accept-challenge");
     const acceptChallenge2 = document.getElementById("accept-challenge-2");
@@ -20,15 +18,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     const acceptMusic = document.getElementById("accept-music");
     const declineMusic = document.getElementById("decline-music");
   
-    // رابط التحديات
+    // رابط التحديات من جوجل شيت
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbyEg96YO6H56kKPwDKfSSA5VaCdIC_j8VaEpNRt9Hpv6cM_pHT2AfnGgJTL2TN1ESw1/exec";
   
-    // متغيرات لتخزين التحديات الحالية
+    // متغيرات لتخزين نصوص التحديات الحالية
     let currentChallenge1 = "";
     let currentChallenge2 = "";
   
-    // متغير لتخزين بيانات البطاقة التي تم النقر عليها (لتحديد نوع الإجراء المطلوب)
-    // النوع يكون "accept" أو "decline"
+    // لتخزين بيانات البطاقة التي تم النقر عليها
+    // الخاصية type تأخذ القيمة "accept" أو "decline"
     let currentAction = null;
   
     // تحميل التحديات من جوجل شيت
@@ -41,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           const challenge1 = data.challenges[1][0] || "لا يوجد تحدي";
           const challenge2 = data.challenges[1][1] || "لا يوجد تحدي";
   
-          // التحقق من تغيير التحديات وإعادة تعيين الحالة إن لزم الأمر
+          // إذا تغير التحدي، يتم إعادة تعيين النتائج
           if (challenge1 !== currentChallenge1 || challenge2 !== currentChallenge2) {
             resetActivity();
             currentChallenge1 = challenge1;
@@ -52,21 +50,18 @@ document.addEventListener("DOMContentLoaded", async function () {
           challengeText2.textContent = challenge2;
           challengePopup.style.display = "flex";
   
-          // استرجاع الحالة من الجلسات السابقة (إذا كانت موجودة)
-          if (localStorage.getItem('acceptedChallenge1') === 'true') {
+          // استرجاع النتيجة من الجلسات السابقة للبطاقة الأولى
+          if (localStorage.getItem('challenge1Result')) {
+            const res1 = localStorage.getItem('challenge1Result');
+            checkmark1.textContent = res1 === 'accepted' ? "✔" : "✘";
             checkmark1.style.display = 'inline';
             challengeText1.style.visibility = "visible";
           }
-          if (localStorage.getItem('acceptedChallenge2') === 'true') {
+          // استرجاع النتيجة من الجلسات السابقة للبطاقة الثانية
+          if (localStorage.getItem('challenge2Result')) {
+            const res2 = localStorage.getItem('challenge2Result');
+            checkmark2.textContent = res2 === 'accepted' ? "✔" : "✘";
             checkmark2.style.display = 'inline';
-            challengeText2.style.visibility = "visible";
-          }
-          if (localStorage.getItem('declinedChallenge1') === 'true') {
-            crossmark1.style.display = 'inline';
-            challengeText1.style.visibility = "visible";
-          }
-          if (localStorage.getItem('declinedChallenge2') === 'true') {
-            crossmark2.style.display = 'inline';
             challengeText2.style.visibility = "visible";
           }
         } else {
@@ -80,105 +75,95 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     }
   
-    // إعادة تعيين الحالة عند ظهور تحديات جديدة
+    // إعادة تعيين الحالة عند تجديد التحدي
     function resetActivity() {
-      localStorage.removeItem('acceptedChallenge1');
-      localStorage.removeItem('acceptedChallenge2');
-      localStorage.removeItem('declinedChallenge1');
-      localStorage.removeItem('declinedChallenge2');
+      localStorage.removeItem('challenge1Result');
+      localStorage.removeItem('challenge2Result');
       checkmark1.style.display = 'none';
       checkmark2.style.display = 'none';
-      crossmark1.style.display = 'none';
-      crossmark2.style.display = 'none';
       challengeText1.style.visibility = "hidden";
       challengeText2.style.visibility = "hidden";
     }
   
+    // دالة لتعيين نتيجة التحدي وتحديث المؤشر
+    function setChallengeResult(challengeText, indicator, storageKey, result) {
+      // result: "accepted" أو "declined"
+      indicator.style.display = 'inline';
+      indicator.textContent = result === 'accepted' ? "✔" : "✘";
+      localStorage.setItem(storageKey, result);
+      challengeText.style.visibility = "visible";
+    }
+  
     // عند الضغط على "قد التحدي" (القبول)
     function acceptChallengeHandler(challengeText, indicator, storageKey) {
-      alert("لقد ضغطت لقبول التحدي!");
-      // تخزين الإجراء المطلوب مع نوعه "accept"
+      // يمكن إزالة التنبيه أو استبداله بما يناسب التطبيق
+      // alert("لقد ضغطت لقبول التحدي!");
       currentAction = { challengeText, indicator, storageKey, type: 'accept' };
       floatingMessageText.textContent = challengeText.textContent;
       floatingMessage.style.display = "block";
-      acceptMusic.play();
+      // في حالة وجود صوت يمكن تشغيله هنا، مثلاً:
+      // acceptMusic.play();
     }
   
     // عند الضغط على "مش قد التحدي" (الرفض)
     function declineChallengeHandler(challengeText, indicator, storageKey) {
-      alert("لقد ضغطت لرفض التحدي!");
-      // تخزين الإجراء المطلوب مع نوعه "decline"
+      // alert("لقد ضغطت لرفض التحدي!");
       currentAction = { challengeText, indicator, storageKey, type: 'decline' };
       floatingMessageText.textContent = challengeText.textContent;
       floatingMessage.style.display = "block";
-      declineMusic.play();
+      // في حالة وجود صوت يمكن تشغيله هنا، مثلاً:
+      // declineMusic.play();
     }
   
     // أحداث أزرار البطاقات
     acceptChallenge.addEventListener("click", function () {
-      acceptChallengeHandler(challengeText1, checkmark1, 'acceptedChallenge1');
+      acceptChallengeHandler(challengeText1, checkmark1, 'challenge1Result');
     });
     acceptChallenge2.addEventListener("click", function () {
-      acceptChallengeHandler(challengeText2, checkmark2, 'acceptedChallenge2');
+      acceptChallengeHandler(challengeText2, checkmark2, 'challenge2Result');
     });
     declineChallenge.addEventListener("click", function () {
-      declineChallengeHandler(challengeText1, crossmark1, 'declinedChallenge1');
+      declineChallengeHandler(challengeText1, checkmark1, 'challenge1Result');
     });
     declineChallenge2.addEventListener("click", function () {
-      declineChallengeHandler(challengeText2, crossmark2, 'declinedChallenge2');
+      declineChallengeHandler(challengeText2, checkmark2, 'challenge2Result');
     });
   
-    /* عند الضغط على الزر العائم:
-       - إذا ضغط المستخدم على علامة "✔" (floatingCheck) فيجب اعتبار النتيجة قبول
-       - إذا ضغط المستخدم على علامة "✘" (floatingCross) فيجب اعتبار النتيجة رفض
-       بغض النظر عن الإجراء الأصلي المُختار،
-       سيتم عرض علامة واحدة فقط (✔ أو ✘) على البطاقة */
+    /* عند الضغط على زر "✔" في النافذة العائمة:
+       - إذا كان الإجراء الأصلي "accept" نعتبر النتيجة قبول،
+         وإلا نعتبر النتيجة رفض.
+       تُحدَّث النتيجة ويتم عرض علامة واحدة فقط في المؤشر. */
     floatingCheck.addEventListener("click", function () {
       if (currentAction) {
         if (currentAction.type === 'accept') {
-          // التأكيد الصحيح لقبول التحدي
-          currentAction.indicator.style.display = 'inline';
-          localStorage.setItem(currentAction.storageKey, 'true');
+          setChallengeResult(currentAction.challengeText, currentAction.indicator, currentAction.storageKey, 'accepted');
           floatingMessageText.textContent = "تم قبول التحدي بنجاح!";
         } else {
-          // المستخدم اختار رفض التحدي سابقاً ولكنه ضغط على ✔ → نعرض علامة الرفض بدلاً من ذلك
-          if (currentAction.challengeText === challengeText1) {
-            crossmark1.style.display = 'inline';
-            localStorage.setItem('declinedChallenge1', 'true');
-          } else {
-            crossmark2.style.display = 'inline';
-            localStorage.setItem('declinedChallenge2', 'true');
-          }
+          // المستخدم اختار رفض التحدي ولكنه ضغط على ✔، فنعتبر النتيجة رفض
+          setChallengeResult(currentAction.challengeText, currentAction.indicator, currentAction.storageKey, 'declined');
           floatingMessageText.textContent = "خطأ: لم يتم قبول التحدي!";
         }
-        currentAction.challengeText.style.visibility = "visible";
+        floatingMessage.style.display = "none";
+        currentAction = null;
       }
-      floatingMessage.style.display = "none";
-      currentAction = null;
     });
   
+    /* عند الضغط على زر "✘" في النافذة العائمة:
+       - إذا كان الإجراء الأصلي "decline" نعتبر النتيجة رفض،
+         وإلا نعتبر النتيجة قبول.
+       تُحدَّث النتيجة ويتم عرض علامة واحدة فقط في المؤشر. */
     floatingCross.addEventListener("click", function () {
       if (currentAction) {
         if (currentAction.type === 'decline') {
-          // التأكيد الصحيح لرفض التحدي
-          currentAction.indicator.style.display = 'inline';
-          localStorage.setItem(currentAction.storageKey, 'true');
+          setChallengeResult(currentAction.challengeText, currentAction.indicator, currentAction.storageKey, 'declined');
           floatingMessageText.textContent = "تم رفض التحدي!";
         } else {
-          // المستخدم اختار قبول التحدي سابقاً ولكنه ضغط على ✘ → نعرض علامة القبول بدلاً من ذلك
-          if (currentAction.challengeText === challengeText1) {
-            checkmark1.style.display = 'inline';
-            localStorage.setItem('acceptedChallenge1', 'true');
-          } else {
-            checkmark2.style.display = 'inline';
-            localStorage.setItem('acceptedChallenge2', 'true');
-          }
+          setChallengeResult(currentAction.challengeText, currentAction.indicator, currentAction.storageKey, 'accepted');
           floatingMessageText.textContent = "خطأ: لم يتم رفض التحدي!";
         }
-        currentAction.challengeText.style.visibility = "visible";
+        floatingMessage.style.display = "none";
+        currentAction = null;
       }
-      floatingMessage.style.display = "none";
-      currentAction = null;
     });
   
     // تحميل التحديات عند بدء تشغيل الصفحة وتحديثها كل دقيقة
@@ -186,7 +171,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     setInterval(loadChallenges, 60000);
   });
   
-  // دوال القائمة الجانبية
+  // دوال القائمة الجانبية (حسب الحاجة)
   function toggleMenu() {
     var sidebar = document.getElementById("sidebar");
     var menuIcon = document.querySelector(".menu-icon");
