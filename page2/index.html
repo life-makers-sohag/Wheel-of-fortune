@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>السعادة برسالة</title>
+  <link rel="icon" href="unnamed-removebg-preview.png" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- أيقونة القائمة الجانبية -->
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+  <!-- القائمة الجانبية -->
+  <div id="sidebar" class="sidebar">
+    <h2>برطمان السعادة</h2>
+    <ul>
+      <li><a href="../index.html">السعادة برسالة</a></li>
+      <li><a href="../page/index.html">ورد الذكر</a></li>
+    </ul>
+    <footer class="main-footer">
+      <p>© 2025 جميع الحقوق محفوظة</p>
+      <p>Developed by: Mahmoud Hamed</p>
+    </footer>
+  </div>
+
+  <!-- نافذة التحدي -->
+  <div id="challenge-popup" class="popup">
+    <div class="popup-content">
+      <!-- البطاقة الأولى -->
+      <div class="challenge-card" id="challenge-card-1">
+        <div class="challenge-front">
+          <h2>التحدي الأول</h2>
+          <p id="challenge-text-1">جارٍ تحميل التحدي...</p>
+          <!-- علامة الصح (مخفية افتراضيًا) -->
+          <span id="checkmark-1" class="indicator">✔</span>
+          <!-- علامة الخطأ (مخفية افتراضيًا) -->
+          <span id="crossmark-1" class="indicator">✘</span>
+        </div>
+        <div class="challenge-back">
+          <button id="accept-challenge">قد التحدي</button>
+          <button id="decline-challenge">مش قد التحدي</button>
+        </div>
+      </div>
+      <!-- البطاقة الثانية -->
+      <div class="challenge-card" id="challenge-card-2">
+        <div class="challenge-front">
+          <h2>التحدي الثاني</h2>
+          <p id="challenge-text-2">جارٍ تحميل التحدي...</p>
+          <!-- علامة الصح (مخفية افتراضيًا) -->
+          <span id="checkmark-2" class="indicator">✔</span>
+          <!-- علامة الخطأ (مخفية افتراضيًا) -->
+          <span id="crossmark-2" class="indicator">✘</span>
+        </div>
+        <div class="challenge-back">
+          <button id="accept-challenge-2">قد التحدي</button>
+          <button id="decline-challenge-2">مش قد التحدي</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- نافذة الرسالة العائمة -->
+  <div id="floating-message" class="floating-message">
+    <p id="floating-message-text">تحدي جديد!</p>
+    <div class="buttons">
+      <button id="floating-check" class="button">✔</button>
+      <button id="floating-cross" class="button">✘</button>
+    </div>
+  </div>
+
+  <!-- عناصر الصوت -->
+  <audio id="accept-music">
+    <source src="videoplayback.m4a" type="audio/mpeg" />
+    متصفحك لا يدعم تشغيل الصوت.
+  </audio>
+
+  <audio id="decline-music">
+    <source src="videoplayback2.m4a" type="audio/mpeg" />
+    متصفحك لا يدعم تشغيل الصوت.
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+/* تنسيق عام */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #024675, #f7af43, #ffffff);
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    direction: rtl;
+  }
+/* حاوية العناصر */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+}
+
+/* قائمة جانبية */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #024675;
+    color: white;
+    transition: left 0.4s ease;
+    z-index: 1000;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.sidebar h2 {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 24px;
+    background: #34495e;
+    color: #ecf0f1;
+    margin: 0;
+}
+
+.sidebar ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    border-bottom: 1px solid #34495e;
+    text-align: center;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    font-size: 18px;
+}
+
+.sidebar ul li:hover {
+    background: #34495e;
+    transform: translateX(10px);
+}
+
+/* زر القائمة */
+.menu-icon {
+    font-size: 26px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #3498db;
+    color: white;
+    padding: 15px 22px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, transform 0.2s ease;
+    z-index: 1100;
+}
+
+.menu-icon:hover {
+    background: #2980b9;
+    transform: scale(1.1);
+}
+
+/* البطاقة 3D */
+.challenge-card {
+    width: 300px;
+    height: 400px;
+    perspective: 1000px;
+    position: relative;
+    margin: 20px;
+  }
+  .challenge-front, .challenge-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+.challenge-front {
+    background: #024675;
+    color: #fff;
+  }
+  .challenge-back {
+    background: #f7af43;
+    color: #333;
+    transform: rotateY(180deg);
+  }
+  .challenge-card:hover .challenge-front {
+    transform: rotateY(180deg);
+  }
+  .challenge-card:hover .challenge-back {
+    transform: rotateY(0deg);
+  }
+
+
+/* إضافة هذا الجزء لمنع الاختفاء */
+.challenge-card.active .challenge-front {
+    transform: rotateY(0deg);
+}
+
+.challenge-card.active .challenge-back {
+    transform: rotateY(180deg);
+}
+
+/* تنسيق النافذة العائمة */
+.floating-message {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    width: 80%;
+    max-width: 400px;
+    z-index: 1000;
+  }
+  .buttons {
+    margin-top: 20px;
+  }
+  
+
+/* مؤشرات القبول/الرفض */
+.indicator {
+    font-size: 30px;
+    margin-top: 10px;
+    display: none;
+  }
+
+
+/* تنسيق الأزرار */
+button {
+    background: #024675;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #2980b9;
+  }

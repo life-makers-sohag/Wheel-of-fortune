@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(to bottom, #6a11cb, #2575fc);
+    background: linear-gradient(to bottom, #024675, #f7af43,#ffffff);
     color: white;
     text-align: center;
     display: flex;
@@ -32,7 +32,7 @@ body {
     height: 300px;
     border-radius: 50%;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
-    background: radial-gradient(circle at center, #ffffff, #b3b3b3);
+    background: radial-gradient(circle at center, #024675, #f7af43,#ffffff);
     transition: transform 0.6s ease-out;
 }
 
@@ -43,7 +43,7 @@ body {
 }
 
 button {
-    background-color: #ff9800;
+    background-color: #024675;
     color: white;
     font-size: 20px;
     padding: 15px 30px;
@@ -56,7 +56,7 @@ button {
 }
 
 button:hover {
-    background-color: #f57c00;
+    background-color: #f7af43;
     box-shadow: 0px 18px 35px rgba(0, 0, 0, 0.3);
     transform: translateY(-6px);
 }
@@ -166,7 +166,7 @@ button:active {
     left: -280px;
     width: 250px;
     height: 100%;
-    background: #2c3e50;
+    background: #024675;
     color: white;
     transition: all 0.4s ease-in-out;
     z-index: 1000;
