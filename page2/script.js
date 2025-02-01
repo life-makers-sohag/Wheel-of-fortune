@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     const floatingMessage = document.getElementById("floating-message");
     const floatingMessageText = document.getElementById("floating-message-text");
     const floatingCheck = document.getElementById("floating-check");
-    const floatingCross = document.getElementById("floating-cross");
   
     const acceptMusic = document.getElementById("accept-music");
     const declineMusic = document.getElementById("decline-music");
@@ -96,23 +95,22 @@ document.addEventListener("DOMContentLoaded", async function () {
   
     // عند الضغط على "قد التحدي" (القبول)
     function acceptChallengeHandler(challengeText, indicator, storageKey) {
-      // يمكن إزالة التنبيه أو استبداله بما يناسب التطبيق
-      // alert("لقد ضغطت لقبول التحدي!");
       currentAction = { challengeText, indicator, storageKey, type: 'accept' };
       floatingMessageText.textContent = challengeText.textContent;
       floatingMessage.style.display = "block";
-      // في حالة وجود صوت يمكن تشغيله هنا، مثلاً:
-      // acceptMusic.play();
+      // إعادة ضبط المؤشر إلى البداية وتشغيل الصوت مرة واحدة
+      acceptMusic.currentTime = 0;
+      acceptMusic.play();
     }
   
     // عند الضغط على "مش قد التحدي" (الرفض)
     function declineChallengeHandler(challengeText, indicator, storageKey) {
-      // alert("لقد ضغطت لرفض التحدي!");
       currentAction = { challengeText, indicator, storageKey, type: 'decline' };
       floatingMessageText.textContent = challengeText.textContent;
       floatingMessage.style.display = "block";
-      // في حالة وجود صوت يمكن تشغيله هنا، مثلاً:
-      // declineMusic.play();
+      // إعادة ضبط المؤشر إلى البداية وتشغيل الصوت مرة واحدة
+      declineMusic.currentTime = 0;
+      declineMusic.play();
     }
   
     // أحداث أزرار البطاقات
@@ -142,24 +140,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           // المستخدم اختار رفض التحدي ولكنه ضغط على ✔، فنعتبر النتيجة رفض
           setChallengeResult(currentAction.challengeText, currentAction.indicator, currentAction.storageKey, 'declined');
           floatingMessageText.textContent = "خطأ: لم يتم قبول التحدي!";
-        }
-        floatingMessage.style.display = "none";
-        currentAction = null;
-      }
-    });
-  
-    /* عند الضغط على زر "✘" في النافذة العائمة:
-       - إذا كان الإجراء الأصلي "decline" نعتبر النتيجة رفض،
-         وإلا نعتبر النتيجة قبول.
-       تُحدَّث النتيجة ويتم عرض علامة واحدة فقط في المؤشر. */
-    floatingCross.addEventListener("click", function () {
-      if (currentAction) {
-        if (currentAction.type === 'decline') {
-          setChallengeResult(currentAction.challengeText, currentAction.indicator, currentAction.storageKey, 'declined');
-          floatingMessageText.textContent = "تم رفض التحدي!";
-        } else {
-          setChallengeResult(currentAction.challengeText, currentAction.indicator, currentAction.storageKey, 'accepted');
-          floatingMessageText.textContent = "خطأ: لم يتم رفض التحدي!";
         }
         floatingMessage.style.display = "none";
         currentAction = null;
