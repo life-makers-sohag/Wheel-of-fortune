@@ -347,19 +347,53 @@ closeWelcome.addEventListener('click', () => {
     welcomePopup.style.display = 'none';
 });
 
-// تحديد الرسالة الترحيبية
-function setWelcomeMessage() {
-    const hours = new Date().getHours();
-    const timeOfDay = (hours < 12) ? "صباح الخير!" : "مساء الخير";
-    welcomeMessage.textContent = `${timeOfDay} يا كتكوت، والمقصود بالخير وجودك يا كتكوت !`;
 
-    welcomePopup.style.display = 'flex';
+
+// دالة الحصول على التوقيت الحالي بالميلي ثانية
+function getCurrentTimestamp() {
+    return Date.now();
 }
 
-// استدعاء الرسالة الترحيبية عند تحميل الصفحة
+// استدعاء الرسالة الترحيبية عند تحميل الصفحة إذا مرت ثلاث ساعات منذ آخر ظهور
 window.onload = () => {
-    setWelcomeMessage();
+    const lastWelcomeTimestamp = localStorage.getItem('lastWelcomeTimestamp');
+    const now = getCurrentTimestamp();
+    const threeHours = 3 * 60 * 60 * 1000; // ثلاث ساعات بالميلي ثانية
+
+    if (!lastWelcomeTimestamp || (now - lastWelcomeTimestamp) > threeHours) {
+        setWelcomeMessage();
+        localStorage.setItem('lastWelcomeTimestamp', now);
+    }
 };
+
+
+// // دالة الحصول على التاريخ بصيغة "YYYY-MM-DD"
+// function getTodayDate() {
+//     const today = new Date();
+//     const year = today.getFullYear();
+//     const month = String(today.getMonth() + 1).padStart(2, '0');
+//     const day = String(today.getDate()).padStart(2, '0');
+//     return `${year}-${month}-${day}`;
+// }
+
+// // استدعاء الرسالة الترحيبية عند تحميل الصفحة مرة واحدة في اليوم
+// window.onload = () => {
+//     const lastWelcomeDate = localStorage.getItem('lastWelcomeDate');
+//     const todayDate = getTodayDate();
+    
+//     if (lastWelcomeDate !== todayDate) {
+//         setWelcomeMessage();
+//         localStorage.setItem('lastWelcomeDate', todayDate);
+//     }
+// };
+
+
+
+
+// // استدعاء الرسالة الترحيبية عند تحميل الصفحة
+// window.onload = () => {
+//     setWelcomeMessage();
+// };
 
 const spinButton = document.getElementById('spin-btn');
 const wheelImage = document.getElementById('wheel-image');
