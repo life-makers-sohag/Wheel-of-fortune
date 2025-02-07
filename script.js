@@ -337,6 +337,7 @@
 
 
 
+
 // تحديد العناصر اللازمة
 const welcomePopup = document.getElementById('welcome-popup');
 const welcomeMessage = document.getElementById('welcome-message');
@@ -347,39 +348,19 @@ closeWelcome.addEventListener('click', () => {
     welcomePopup.style.display = 'none';
 });
 
-// دالة الحصول على التوقيت الحالي بالميلي ثانية
-function getCurrentTimestamp() {
-    return Date.now();
-}
-
-// دالة الحصول على التاريخ الحالي بصيغة YYYY-MM-DD
-function getTodayDate() {
-    return new Date().toISOString().split('T')[0]; // صيغة YYYY-MM-DD
-}
-
-// استدعاء الرسالة الترحيبية عند تحميل الصفحة إذا مرت ثلاث ساعات منذ آخر ظهور
-window.onload = () => {
-    const lastWelcomeTimestamp = localStorage.getItem('lastWelcomeTimestamp');
-    const lastWelcomeDate = localStorage.getItem('lastWelcomeDate');
-    const now = Date.now();
-    const todayDate = getTodayDate();
-    const threeHours = 3 * 60 * 60 * 1000; // ثلاث ساعات بالميلي ثانية
-
-    // عرض الرسالة الترحيبية إذا مرّت 3 ساعات أو كان التاريخ مختلفًا
-    if (!lastWelcomeTimestamp || (now - lastWelcomeTimestamp) > threeHours || lastWelcomeDate !== todayDate) {
-        setWelcomeMessage();
-        localStorage.setItem('lastWelcomeTimestamp', now);
-        localStorage.setItem('lastWelcomeDate', todayDate);
-    }
-
-    // باقي العمليات الأخرى مثل تحميل الرسائل
-    loadMessages();
-};
-
+// تحديد الرسالة الترحيبية
 function setWelcomeMessage() {
-    welcomeMessage.textContent = "مرحبًا بك! نأمل أن تستمتع باستخدام الموقع.";
-    welcomePopup.style.display = 'block';
+    const hours = new Date().getHours();
+    const timeOfDay = (hours < 12) ? "صباح الخير!" : "مساء الخير";
+    welcomeMessage.textContent = `${timeOfDay} يا كتكوت، والمقصود بالخير وجودك يا كتكوت !`;
+
+    welcomePopup.style.display = 'flex';
 }
+
+// استدعاء الرسالة الترحيبية عند تحميل الصفحة
+window.onload = () => {
+    setWelcomeMessage();
+};
 
 const spinButton = document.getElementById('spin-btn');
 const wheelImage = document.getElementById('wheel-image');
@@ -486,6 +467,10 @@ function showNextMessage() {
 // إعداد الأزرار
 spinButton.addEventListener('click', startSpinning);
 closePopup.addEventListener('click', () => (messagePopup.style.display = 'none'));
+
+// تحميل الرسائل عند بدء الصفحة
+loadMessages();
+
 
 function toggleMenu() {
     var sidebar = document.getElementById("sidebar");

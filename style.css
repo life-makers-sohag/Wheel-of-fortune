@@ -128,7 +128,6 @@ button:active {
 
 /* نافذة الترحيب */
 #welcome-popup {
-    padding-top:50%;
     display: none;
     position: fixed;
     top: 50%;
