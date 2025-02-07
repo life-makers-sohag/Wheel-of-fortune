@@ -85,7 +85,6 @@ body {
   
   /* زر القائمة */
   .menu-icon {
-    font-size: 26px;
     cursor: pointer;
     position: fixed;
     top: 15px;

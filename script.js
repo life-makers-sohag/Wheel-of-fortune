@@ -347,53 +347,39 @@ closeWelcome.addEventListener('click', () => {
     welcomePopup.style.display = 'none';
 });
 
-
-
 // دالة الحصول على التوقيت الحالي بالميلي ثانية
 function getCurrentTimestamp() {
     return Date.now();
 }
 
+// دالة الحصول على التاريخ الحالي بصيغة YYYY-MM-DD
+function getTodayDate() {
+    return new Date().toISOString().split('T')[0]; // صيغة YYYY-MM-DD
+}
+
 // استدعاء الرسالة الترحيبية عند تحميل الصفحة إذا مرت ثلاث ساعات منذ آخر ظهور
 window.onload = () => {
     const lastWelcomeTimestamp = localStorage.getItem('lastWelcomeTimestamp');
-    const now = getCurrentTimestamp();
+    const lastWelcomeDate = localStorage.getItem('lastWelcomeDate');
+    const now = Date.now();
+    const todayDate = getTodayDate();
     const threeHours = 3 * 60 * 60 * 1000; // ثلاث ساعات بالميلي ثانية
 
-    if (!lastWelcomeTimestamp || (now - lastWelcomeTimestamp) > threeHours) {
+    // عرض الرسالة الترحيبية إذا مرّت 3 ساعات أو كان التاريخ مختلفًا
+    if (!lastWelcomeTimestamp || (now - lastWelcomeTimestamp) > threeHours || lastWelcomeDate !== todayDate) {
         setWelcomeMessage();
         localStorage.setItem('lastWelcomeTimestamp', now);
+        localStorage.setItem('lastWelcomeDate', todayDate);
     }
+
+    // باقي العمليات الأخرى مثل تحميل الرسائل
+    loadMessages();
 };
 
-
-// // دالة الحصول على التاريخ بصيغة "YYYY-MM-DD"
-// function getTodayDate() {
-//     const today = new Date();
-//     const year = today.getFullYear();
-//     const month = String(today.getMonth() + 1).padStart(2, '0');
-//     const day = String(today.getDate()).padStart(2, '0');
-//     return `${year}-${month}-${day}`;
-// }
-
-// // استدعاء الرسالة الترحيبية عند تحميل الصفحة مرة واحدة في اليوم
-// window.onload = () => {
-//     const lastWelcomeDate = localStorage.getItem('lastWelcomeDate');
-//     const todayDate = getTodayDate();
-    
-//     if (lastWelcomeDate !== todayDate) {
-//         setWelcomeMessage();
-//         localStorage.setItem('lastWelcomeDate', todayDate);
-//     }
-// };
-
-
-
-
-// // استدعاء الرسالة الترحيبية عند تحميل الصفحة
-// window.onload = () => {
-//     setWelcomeMessage();
-// };
+function setWelcomeMessage() {
+    welcomeMessage.textContent = "مرحبًا بك! نأمل أن تستمتع باستخدام الموقع.";
+    welcomePopup.style.display = 'block';
+}
 
 const spinButton = document.getElementById('spin-btn');
 const wheelImage = document.getElementById('wheel-image');
@@ -500,10 +486,6 @@ function showNextMessage() {
 // إعداد الأزرار
 spinButton.addEventListener('click', startSpinning);
 closePopup.addEventListener('click', () => (messagePopup.style.display = 'none'));
-
-// تحميل الرسائل عند بدء الصفحة
-loadMessages();
-
 
 function toggleMenu() {
     var sidebar = document.getElementById("sidebar");

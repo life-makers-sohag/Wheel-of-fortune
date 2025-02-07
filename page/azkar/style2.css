@@ -1,29 +1,143 @@
-/* تنسيق عام */
+/* style2.css */
+:root {
+    --primary-color: #024675;
+    --secondary-color: #f7af43;
+    --text-color: #2c3e50;
+    --background-gradient: linear-gradient(to bottom, #024675, #f7af43,#ffffff);
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to bottom, #024675, #f7af43,#ffffff);
-    text-align: center;
-    direction: rtl;
-    margin: 0;
-    padding: 0;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-
-
-
-}
-
-.container {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--background-gradient);
+    color: var(--text-color);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+}
+
+
+/* القائمة الجانبية */
+.sidebar {
+    width: 280px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-out;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+/* حاوية الأذكار الرئيسية */
+.azkar-container {
+    width: 95%;
+    max-width: 800px;
+    margin: 80px auto 30px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.input-group {
+    display: grid;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+input, button {
+    width: 90%;
+    padding: 13px 15px;
+    border-radius: 8px;
+    border: 1px solid #000000;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* قائمة الأذكار */
+.azkar-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.azkar-card {
+    position: relative;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    break-inside: avoid;
+}
+
+.azkar-card.fixed {
+    border-right: 5px solid var(--primary-color);
+    background: #f8f9fa;
+}
+
+.delete-btn {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
     align-items: center;
-    gap: 40px;
+    justify-content: center;
+}
+
+/* التجاوب */
+@media (max-width: 768px) {
+    .azkar-container {
+        margin-top: 60px;
+        padding: 15px;
+    }
+    
+    .azkar-card {
+        border-right: 7px solid var(--primary-color);
+        background: #f8f9fa;
+        padding: 15px;
+    }
+    
+    .menu-icon {
+        padding: 12px 18px;
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .azkar-container {
+        width: 98%;
+        margin-top: 50px;
+    }
+    
+    input, button {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+    
+    .delete-btn {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 
@@ -100,155 +214,10 @@ body {
     border-radius: 50%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     transition: background 0.3s ease, transform 0.2s ease;
+    z-index:2000;
 }
 
 .menu-icon:hover {
     background: #2980b9;
     transform: scale(1.1) rotate(90deg);
-}
-
-/* صندوق الأذكار */
-.azkar-container {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 550px;
-    margin: 100px auto;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transform: perspective(1000px) rotateX(5deg);
-}
-
-.azkar-container:hover {
-    transform: perspective(1000px) rotateX(0deg) scale(1.02);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-}
-
-/* العناوين */
-h2, h3 {
-    color: #2c3e50;
-    font-size: 26px;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* الحقول والأزرار */
-input, button {
-    margin: 15px 0;
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 18px;
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    transition: border 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-input:focus {
-    border-color: #3498db;
-    outline: none;
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
-    transform: scale(1.02);
-}
-
-/* زر الإضافة */
-button {
-    background: #27ae60;
-    color: white;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-button:hover {
-    background: #219653;
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* قائمة الأذكار */
-#azkar-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* تباعد بين البطاقات */
-    margin-top: 20px;
-}
-
-/* بطاقة الذكر */
-.azkar-card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transform: perspective(1000px) rotateY(5deg);
-    position: relative;
-    padding-left: 60px; /* إضافة مساحة لزر الحذف */
-}
-
-.azkar-card:hover {
-    transform: perspective(1000px) rotateY(0deg) scale(1.02);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* زر الحذف */
-.delete-btn {
-    background: #e74c3c;
-    color: white;
-    padding: 8px;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    left: 10px; /* وضع الزر في الجزء الشمالي */
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px; /* حجم ثابت للعرض */
-    height: 40px; /* حجم ثابت للارتفاع */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.delete-btn:hover {
-    background: #c0392b;
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-/* جعل الموقع متجاوبًا مع جميع الشاشات */
-@media (max-width: 600px) {
-    .azkar-container {
-        width: 95%;
-        padding: 25px;
-    }
-
-    .menu-icon {
-        font-size: 24px;
-        padding: 14px 20px;
-    }
-
-    button, input {
-        font-size: 18px;
-        padding: 14px;
-    }
-
-    .azkar-card {
-        font-size: 18px;
-        padding: 15px;
-    }
-
-    .delete-btn {
-        font-size: 14px;
-        padding: 6px 10px;
-    }
 }

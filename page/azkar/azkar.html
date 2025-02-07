@@ -1,11 +1,12 @@
+
+
+
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الأذكار</title>
-    <link rel="icon" href="unnamed-removebg-preview.png" type="image/x-icon">
-
     <link rel="stylesheet" href="style2.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -19,7 +20,7 @@
     <h2>برطمان السعادة</h2>
     <ul>
         <li><a href="..\index.html">ورد الذكر</a></li>
-        <li><a href="../index.html">السعادة برسالة</a></li>
+        <li><a href="..\..\index.html">السعادة برسالة</a></li>
 
     </ul>
     <footer class="main-footer">
@@ -28,18 +29,20 @@
     </footer>
 </div>
 
+
 <!-- قسم إضافة الأذكار -->
 <div class="azkar-container">
     <h2>أضف ذكرًا جديدًا</h2>
-    <input type="text" id="zekr-input" placeholder="اكتب الذكر هنا">
-    <input type="number" id="zekr-count" placeholder="عدد التكرار" min="1">
-    <button onclick="addZekr()">إضافة الذكر</button>
+    <div class="input-group">
+        <input type="text" id="zekr-input" placeholder="اكتب الذكر هنا">
+        <input type="number" id="zekr-count" placeholder="عدد التكرار" min="1">
+        <button onclick="addZekr()">إضافة الذكر</button>
+    </div>
 
     <h3>الأذكار المحفوظة:</h3>
-    <div id="azkar-list"></div> <!-- تم تغيير <ul> إلى <div> -->
+    <div id="azkar-list" class="azkar-grid"></div>
 </div>
 
 <script src="script2.js"></script>
-
 </body>
 </html>
